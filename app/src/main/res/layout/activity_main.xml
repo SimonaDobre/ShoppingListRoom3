@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/deleteAllButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="delete all"
+        app:backgroundTint="#F32D1F" />
+
+    <EditText
+        android:id="@+id/nameOfItemEditTextID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="numele produsului"
+        android:inputType="textPersonName"
+        android:padding="16dp" />
+
+    <LinearLayout
+        android:id="@+id/liniaCuButoane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameOfItemEditTextID"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/decreaseButtonID"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="9dp"
+            android:layout_marginBottom="10dp"
+            android:text="-"
+            android:textSize="30sp"
+            app:backgroundTint="#8BC34A" />
+
+        <TextView
+            android:id="@+id/amountTextViewID"
+            android:layout_width="80dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="50sp" />
+
+        <Button
+            android:id="@+id/increaseButtonID"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="30sp"
+            app:backgroundTint="#8BC34A" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="ADD"
+            android:textSize="30sp"
+            app:backgroundTint="#8BC34A" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewID"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/liniaCuButoane"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>
