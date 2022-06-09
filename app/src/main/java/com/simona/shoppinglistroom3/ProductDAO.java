@@ -31,7 +31,4 @@ public interface ProductDAO {
     @Query("SELECT * FROM allProducts")
     LiveData<List<Product>> getAllProductsFromTheDataBase();
 
-    @Query("SELECT * FROM allProducts WHERE id =:specificID")
-    Product getSpecificProduct(int specificID);
-
 }

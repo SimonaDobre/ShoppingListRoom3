@@ -22,6 +22,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements EditProduct {
@@ -56,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         setContentView(R.layout.activity_main);
 
         initViews();
-        swipeToDelete();
+        swipeToDeleteSwapToMove();
         displayNewListOfProducts();
 
     }
@@ -141,8 +144,9 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
-    private void swipeToDelete() {
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+    private void swipeToDeleteSwapToMove() {
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
                 return false;
@@ -152,6 +156,13 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 Product productToBeDeleted = myAdapter.getProductAtPosition(viewHolder.getAdapterPosition());
                 productViewModel.deleteOneProductViewModel(productToBeDeleted);
+                Snackbar.make(rv, productToBeDeleted.getProductName() + " was deleted ", Snackbar.LENGTH_LONG)
+                        .setAction("UNDO ?", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                productViewModel.insertWrapperViewModel(productToBeDeleted);
+                            }
+                        }).show();
             }
         }).attachToRecyclerView(rv);
     }
@@ -168,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         launcherForEditProduct.launch(intentToEditActivity);
     }
 
-
     private void resultReceivedAfterEdit(ActivityResult ar) {
         if (ar.getResultCode() == RESULT_OK) {
             Intent receivedIntentAfterEdit = ar.getData();
@@ -181,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
             }
         }
     }
-
 
     @Override
     public void clickForMarkAsCompleted(Product productToBeMarked) {
