@@ -21,7 +21,6 @@ public class ProductViewModel extends AndroidViewModel {
     private LiveData<List<Product>> productsArrayViewModel;
 
     ExecutorService exec = Executors.newSingleThreadExecutor();
-//    Handler han = new Handler(Looper.getMainLooper());
 
     public ProductViewModel(@NonNull Application application) {
         super(application);

@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         setContentView(R.layout.activity_main);
 
         initViews();
-        swipeToDeleteSwapToMove();
+        swipeToDelete();
         displayNewListOfProducts();
 
     }
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         productViewModel.getProductsArrayViewModel().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                myAdapter.actualiseListOfProducts(products);
+                myAdapter.updateListOfProducts(products);
             }
         });
     }
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements EditProduct {
         mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
-    private void swipeToDeleteSwapToMove() {
+    private void swipeToDelete() {
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
                 ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override

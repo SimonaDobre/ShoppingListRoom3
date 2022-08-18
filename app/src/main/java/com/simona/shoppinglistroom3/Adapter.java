@@ -2,14 +2,16 @@ package com.simona.shoppinglistroom3;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.util.Log;
+import android.graphics.Typeface;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,18 +39,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
 
         public ProductViewHolder(@NonNull View itemView, EditProduct epi) {
             super(itemView);
-            productTV = itemView.findViewById(R.id.productTextView);
-            qtyTV = itemView.findViewById(R.id.qtyTextView);
-            idTV = itemView.findViewById(R.id.idTextView);
-            editIV = itemView.findViewById(R.id.editProductImageView);
+            productTV = itemView.findViewById(R.id.productTV);
+            qtyTV = itemView.findViewById(R.id.qtyTV);
+            idTV = itemView.findViewById(R.id.idTV);
+            editIV = itemView.findViewById(R.id.editProductIV);
             wholeRow = itemView.findViewById(R.id.itemViewLinearLayout);
 
             this.epi = epi;
             itemView.setOnClickListener(this);
 
             editIV.setOnClickListener(this);
-
-//            itemView.setOnLongClickListener(this);
         }
 
         @Override
@@ -56,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             int clickedID = view.getId();
             int clickedRow = getAdapterPosition();
             if (clickedRow != RecyclerView.NO_POSITION) {
-                if (clickedID == R.id.editProductImageView) {
+                if (clickedID == R.id.editProductIV) {
                     epi.editThisProduct(productsArray.get(clickedRow));
                 } else {
                     epi.clickForMarkAsCompleted(productsArray.get(clickedRow));
@@ -84,7 +84,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
             holder.qtyTV.setPaintFlags(holder.qtyTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             holder.idTV.setPaintFlags((holder.idTV.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG));
         } else {
-            // cand e false, nerezolvat, textul ramane netaiat
             holder.productTV.setPaintFlags(0);
             holder.qtyTV.setPaintFlags(0);
             holder.idTV.setPaintFlags(0);
@@ -96,7 +95,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ProductViewHolder> {
         return productsArray.size();
     }
 
-    public void actualiseListOfProducts(List<Product> newList) {
+    public void updateListOfProducts(List<Product> newList) {
         productsArray = newList;
         notifyDataSetChanged();
     }

@@ -51,7 +51,6 @@ public class EditProductActivity extends AppCompatActivity {
         qtyED.setText(String.valueOf(qtyToBeEdited));
     }
 
-
     void saveAndBackToMain() {
         String editedName = nameED.getText().toString();
         int editedQty = Integer.parseInt(qtyED.getText().toString());
